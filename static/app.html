@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Judges of Hades</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #000000 0%,
+          #1e1b4b 50%,
+          #4c1d95 100%
+        );
+        color: white;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .section {
+        min-height: 100vh;
+        position: relative;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 3rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      .logo {
+        text-decoration: none;
+        color: white;
+      }
+
+      .logo h2 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        letter-spacing: 0.05em;
+      }
+
+      .logo p {
+        font-size: 0.875rem;
+        color: #d1d5db;
+        margin-top: 0.25rem;
+      }
+
+      .logo:hover h2 {
+        color: #ec4899;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        border: 1px solid #4b5563;
+        border-radius: 9999px;
+        padding: 0.75rem 2rem;
+      }
+
+      .nav-links a {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: color 0.3s;
+        text-decoration: none;
+      }
+
+      .nav-links a:hover {
+        color: #ec4899;
+      }
+
+      .main-content {
+        padding: 0 3rem;
+        margin-top: 5rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      h1 {
+        font-size: 7rem;
+        font-weight: bold;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+        letter-spacing: -0.02em;
+      }
+
+      .divider {
+        width: 6rem;
+        height: 0.25rem;
+        background: linear-gradient(to right, #ec4899, #a855f7);
+        margin-bottom: 2rem;
+      }
+
+      .cta-button {
+        background: linear-gradient(to right, #ec4899, #a855f7);
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 9999px;
+        font-size: 1.125rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .cta-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 50px rgba(236, 72, 153, 0.4);
+      }
+
+      .circle-decoration {
+        position: absolute;
+        bottom: -15rem;
+        right: -10rem;
+        width: 30rem;
+        height: 30rem;
+        border: 2.5rem solid #ec4899;
+        border-radius: 50%;
+        opacity: 0.8;
+      }
+
+      .glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        z-index: 1;
+      }
+
+      .glow-1 {
+        top: 25%;
+        left: 25%;
+        width: 16rem;
+        height: 16rem;
+        background: rgba(168, 85, 247, 0.1);
+      }
+
+      .glow-2 {
+        bottom: 25%;
+        right: 25%;
+        width: 20rem;
+        height: 20rem;
+        background: rgba(236, 72, 153, 0.1);
+      }
+
+      .circle-glow {
+        position: absolute;
+        bottom: -15rem;
+        right: -10rem;
+        width: 30rem;
+        height: 30rem;
+        background: radial-gradient(
+          circle,
+          rgba(236, 72, 153, 0.2),
+          rgba(168, 85, 247, 0.2)
+        );
+        border-radius: 50%;
+        filter: blur(80px);
+        z-index: 1;
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 3.5rem;
+        }
+
+        nav {
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .circle-decoration {
+          width: 20rem;
+          height: 20rem;
+          right: -8rem;
+          bottom: -10rem;
+        }
+      }
+
+      /* Stats Section Styles */
+      .stats-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 3rem;
+        position: relative;
+      }
+
+      .stats-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4rem;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        opacity: 0;
+        transform: translateY(50px);
+        animation: fadeInUp 1s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .stat-card {
+        text-align: center;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 20px;
+        border: 1px solid rgba(236, 72, 153, 0.2);
+        backdrop-filter: blur(10px);
+        transition: all 0.4s ease;
+        animation: slideIn 0.8s ease forwards;
+        opacity: 0;
+      }
+
+      .stat-card:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+
+      .stat-card:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+
+      .stat-card:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+
+      @keyframes slideIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .stat-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(236, 72, 153, 0.6);
+        box-shadow: 0 20px 40px rgba(236, 72, 153, 0.3);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .stat-number {
+        font-size: 6rem;
+        font-weight: bold;
+        background: linear-gradient(135deg, #ec4899, #a855f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+        animation: countUp 2s ease forwards;
+      }
+
+      .stat-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-subtitle {
+        font-size: 1rem;
+        color: #d1d5db;
+      }
+
+      .logo-stats {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 4rem;
+      }
+
+      .logo-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #ec4899, #a855f7);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      @media (max-width: 968px) {
+        .stats-container {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .stat-number {
+          font-size: 4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Home Section -->
+    <div class="section">
+      <nav>
+        <a href="https://www.atharvauni.edu.in/" class="logo" target="_blank">
+          <h2>ATHARVA UNIVERSITY</h2>
+          <p>MUMBAI</p>
+        </a>
+
+        <div class="nav-links">
+          <a href="https://example.com/home" target="_blank">HOME</a>
+          <a href="https://example.com/about" target="_blank">ABOUT</a>
+          <a href="https://example.com/contact" target="_blank">CONTACT</a>
+        </div>
+      </nav>
+
+      <div class="main-content">
+        <h1>JUDGES OF<br />HADES</h1>
+        <div class="divider"></div>
+        <a
+          href="https://example.com/tryitout"
+          class="cta-button"
+          target="_blank"
+          >TRY IT OUT</a
+        >
+      </div>
+
+      <div class="circle-decoration"></div>
+      <div class="circle-glow"></div>
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats-section">
+      <div style="width: 100%">
+        <div class="logo-stats">
+          <div class="logo-icon">⚡</div>
+          <div class="logo-text">Judges of Hades</div>
+        </div>
+
+        <div class="stats-container">
+          <div class="stat-card">
+            <div class="stat-number">1</div>
+            <div class="stat-title">State of the Art</div>
+            <div class="stat-subtitle">Agentic System</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-number">4</div>
+            <div class="stat-title">Latest Customized</div>
+            <div class="stat-subtitle">Agents</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-number">∞</div>
+            <div class="stat-title">Problems</div>
+            <div class="stat-subtitle">Solved</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer style="text-align: center">
+      Created by Shlok Nair | Karan Rawal | Hridayi Bhelli | Pallavi Ragoni
+    </footer>
+  </body>
+</html>
